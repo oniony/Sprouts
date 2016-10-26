@@ -19,8 +19,6 @@ Pattern Matching
 It can be used to replace complex switch statements, overloaded methods and dynamic
 invocations for more readable, rationalizable code.
 
-------------------
-
 - - - 
 
 © 2016 Paul Ruane
