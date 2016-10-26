@@ -9,12 +9,13 @@ not already present in the .NET core libraries.
 Each library provides a distinct capability that can be included in a
 project individually.
 
-Libraries
-=========
+Modules
+=======
 
-[Pattern Matching](https://raw.githubusercontent.com/oniony/Sprouts/master/Modules/PatternMatching/README.md)
+Pattern Matching
+----------------
 
-Pattern Matching allows flow control based upon the type and content of objects.
+[Pattern Matching](https://github.com/oniony/Sprouts/blob/master/Modules/PatternMatching/README.md) allows flow control based upon the type and content of objects.
 It can be used to replace complex switch statements, overloaded methods and dynamic
 invocations for more readable, rationalizable code.
 
