@@ -16,8 +16,13 @@ Pattern Matching
 ----------------
 
 Provides a simple pattern matching facility, to allow perform functions
-based upon the type or properties of an object. It can be used to replace
-dynamic method invocation with an easier to understand and debug alternative.
+based upon the type or properties of an object. It can be used to replace switch statements
+to hide the casting, or to replace dynamic method invocation with a form that is both easier
+to read and debug.
+
+    TreeNode node = ...
+    string text = node.Match().Returns<string>.Case<FruitNode>(fruit => $"A {fruit.Name} fruit")
+                                              .Case<AnimalNode>(animal => animal.Size == Size.Large, $"A large {animal.Name} animal");
 
 - - - 
 
