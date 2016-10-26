@@ -1,4 +1,4 @@
-![S·P·R·O·U·T·S](https://github.com/oniony/Sprouts/Graphics/Sprouts.png)
+![S·P·R·O·U·T·S](https://raw.githubusercontent.com/oniony/Sprouts/master/Graphics/Sprouts.png)
 
 What is Sprouts
 ===============
