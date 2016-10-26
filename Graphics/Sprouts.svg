@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="800.60568"
-     inkscape:cy="380.68152"
+     inkscape:zoom="0.76969699"
+     inkscape:cx="372.04724"
+     inkscape:cy="526.18109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -83,5 +83,11 @@
            y="413.94577"
            style="fill:#008000;fill-opacity:1" /></flowRegion><flowPara
          id="flowPara3780"
-         style="font-size:72px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#008000;fill-opacity:1;font-family:Berlin Sans FB Demi;-inkscape-font-specification:Berlin Sans FB Demi Bold">SPROUTS</flowPara></flowRoot>  </g>
+         style="font-size:72px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#008000;fill-opacity:1;font-family:Berlin Sans FB Demi;-inkscape-font-specification:Berlin Sans FB Demi Bold">SPROUTS</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#bed566;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1"
+       d="m 171.70359,514.47763 1.16518,-14.61758 16.10052,-14.40573 19.4901,-3.28367"
+       id="path2997"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+  </g>
 </svg>
