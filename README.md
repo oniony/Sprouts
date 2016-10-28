@@ -19,6 +19,11 @@ Pattern Matching
 It can be used to replace complex switch statements, overloaded methods and dynamic
 invocations for more readable, rationalizable code.
 
+    string description = PatternMatch(node).Returns<string>
+                                        .Case<FruitNode>(fruit => $"A {fruit.Name} fruit")
+                                        .Case<AnimalNode>(animal => animal.Size == Size.Large, $"A large {animal.Name} animal")
+                                        .Default(node => "Something else");
+
 - - - 
 
 © 2016 Paul Ruane
