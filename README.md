@@ -20,9 +20,9 @@ It can be used to replace complex switch statements, overloaded methods and dyna
 invocations for more readable, rationalizable code.
 
     string description = PatternMatch(node).Returns<string>
-                                        .Case<FruitNode>(fruit => $"A {fruit.Name} fruit")
-                                        .Case<AnimalNode>(animal => animal.Size == Size.Large, $"A large {animal.Name} animal")
-                                        .Default(node => "Something else");
+                                           .Case<FruitNode>(fruit => $"A {fruit.Name} fruit")
+                                           .Case<AnimalNode>(animal => animal.Size == Size.Large, $"A large {animal.Name} animal")
+                                           .Default(node => "Something else");
 
 - - - 
 
