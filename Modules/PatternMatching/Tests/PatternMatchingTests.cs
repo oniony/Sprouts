@@ -2,7 +2,9 @@ using System;
 
 using NUnit.Framework;
 
-namespace Oniony.Sprouts.Core.PatternMatching.Tests
+using static Oniony.Sprouts.PatternMatching.PatternMatching;
+
+namespace Oniony.Sprouts.PatternMatching.Tests
 {
     [TestFixture]
     public sealed class PatternMatchingTests
@@ -24,11 +26,11 @@ namespace Oniony.Sprouts.Core.PatternMatching.Tests
 
             // test
 
-            berty.Match().Case(berty, _ => isBerty = true)
-                         .Case<Animal>(_ => _.Name == "Rover", _ => isRover = true)
-                         .Case<Dog>(_ => isDog = true)
-                         .Case<Cat>(_ => isCat = true)
-                         .Default(_ => isSomethingElse = true);
+            PatternMatch(berty).Case(berty, _ => isBerty = true)
+                               .Case<Animal>(_ => _.Name == "Rover", _ => isRover = true)
+                               .Case<Dog>(_ => isDog = true)
+                               .Case<Cat>(_ => isCat = true)
+                               .Otherwise(_ => isSomethingElse = true);
 
             // validate
 
@@ -55,11 +57,11 @@ namespace Oniony.Sprouts.Core.PatternMatching.Tests
 
             // test
 
-            rover.Match().Case(berty, _ => isBerty = true)
-                         .Case<Animal>(_ => _.Name == "Rover", _ => isRover = true)
-                         .Case<Dog>(_ => isDog = true)
-                         .Case<Cat>(_ => isCat = true)
-                         .Default(_ => isSomethingElse = true);
+            PatternMatch(rover).Case(berty, _ => isBerty = true)
+                               .Case<Animal>(_ => _.Name == "Rover", _ => isRover = true)
+                               .Case<Dog>(_ => isDog = true)
+                               .Case<Cat>(_ => isCat = true)
+                               .Otherwise(_ => isSomethingElse = true);
 
             // validate
 
@@ -86,11 +88,11 @@ namespace Oniony.Sprouts.Core.PatternMatching.Tests
 
             // test
 
-            sebastian.Match().Case(berty, _ => isBerty = true)
-                             .Case<Animal>(_ => _.Name == "Rover", _ => isRover = true)
-                             .Case<Dog>(_ => isDog = true)
-                             .Case<Cat>(_ => isCat = true)
-                             .Default(_ => isSomethingElse = true);
+            PatternMatch(sebastian).Case(berty, _ => isBerty = true)
+                                   .Case<Animal>(_ => _.Name == "Rover", _ => isRover = true)
+                                   .Case<Dog>(_ => isDog = true)
+                                   .Case<Cat>(_ => isCat = true)
+                                   .Otherwise(_ => isSomethingElse = true);
 
             // validate
 
@@ -117,11 +119,11 @@ namespace Oniony.Sprouts.Core.PatternMatching.Tests
 
             // test
 
-            ravichandran.Match().Case(berty, _ => isBerty = true)
-                                .Case<Animal>(_ => _.Name == "Rover", _ => isRover = true)
-                                .Case<Dog>(_ => isDog = true)
-                                .Case<Cat>(_ => isCat = true)
-                                .Default(_ => isSomethingElse = true);
+            PatternMatch(ravichandran).Case(berty, _ => isBerty = true)
+                                      .Case<Animal>(_ => _.Name == "Rover", _ => isRover = true)
+                                      .Case<Dog>(_ => isDog = true)
+                                      .Case<Cat>(_ => isCat = true)
+                                      .Otherwise(_ => isSomethingElse = true);
 
             // validate
 
@@ -156,11 +158,12 @@ namespace Oniony.Sprouts.Core.PatternMatching.Tests
 
             // test
 
-            string description = animal.Match().Returns<string>().Case(berty, _ => "Berty!")
-                                                                 .Case<Animal>(_animal => _animal.Name == "Rover", _animal => "Rover!")
-                                                                 .Case<Dog>(dog => "a dog called " + dog.Name)
-                                                                 .Case<Cat>(cat => "a cat called " + cat.Name)
-                                                                 .Default(_animal => "an animal called " + _animal.Name);
+            string description = PatternMatch(animal).Returns<string>()
+                                                     .Case(berty, _ => "Berty!")
+                                                     .Case<Animal>(_animal => _animal.Name == "Rover", _animal => "Rover!")
+                                                     .Case<Dog>(dog => "a dog called " + dog.Name)
+                                                     .Case<Cat>(cat => "a cat called " + cat.Name)
+                                                     .Otherwise(_animal => "an animal called " + _animal.Name);
 
             // validate
 
@@ -168,41 +171,67 @@ namespace Oniony.Sprouts.Core.PatternMatching.Tests
         }
 
         [Test]
-        public void MatchesDefault()
+        public void HonoursExplicitDefault()
         {
             // set-up
 
             Animal berty = new Dog("Berty");
             Animal henry = new Skunk("Henry");
 
-            var isBerty = false;
-            var isRover = false;
-            var isDog = false;
-            var isCat = false;      
-            var isSomethingElse = false;
-                                       
             // test
 
-            henry.Match().Case(berty, _ => isBerty = true)
-                         .Case<Animal>(_ => _.Name == "Rover", _ => isRover = true)
-                         .Case<Dog>(_ => isDog = true)
-                         .Case<Cat>(_ => isCat = true)
-                         .Default(_ => isSomethingElse = true);
+            string text = PatternMatch(henry).Returns<string>()
+                                             .Case(berty, _ => "Berty")
+                                             .Case<Animal>(_ => _.Name == "Rover", _ => "Rover")
+                                             .Case<Dog>(_ => "dog")
+                                             .Case<Cat>(_ => "cat")
+                                             .Otherwise(_ => "other");
 
             // validate
 
-            Assert.IsFalse(isBerty);
-            Assert.IsFalse(isRover);
-            Assert.IsFalse(isDog);
-            Assert.IsFalse(isCat);
-            Assert.IsTrue(isSomethingElse);
+            Assert.AreEqual(text, "other");
+        }
+
+        [Test]
+        public void HonoursImplicitDefault()
+        {
+            // set-up
+
+            Animal berty = new Dog("Berty");
+            Animal henry = new Skunk("Henry");
+
+            // test
+
+            string text = PatternMatch(henry).Returns<string>()
+                                             .Case(berty, _ => "Berty")
+                                             .Case<Animal>(_ => _.Name == "Rover", _ => "rover")
+                                             .Case<Dog>(_ => "dog")
+                                             .Case<Cat>(_ => "cat");
+
+            // validate
+
+            Assert.IsNull(text);
+        }
+
+        [Test]
+        [ExpectedException(typeof (MatchFailureException))]
+        public void ThrowsIfNotMatched()
+        {
+            // set-up
+
+            Animal berty = new Dog("Purdy");
+
+            // test
+
+            PatternMatch(berty).Case<Cat>(_ => { })
+                               .OtherwiseThrow();
         }
 
         #endregion
 
         #region Common
 
-        abstract class Animal : IEquatable<Animal>
+        private abstract class Animal : IEquatable<Animal>
         {
             protected Animal(string name)
             {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Oniony.Sprouts.Core.PatternMatching
+namespace Oniony.Sprouts.PatternMatching
 {
     public sealed class MatchFailureException : ApplicationException
     {

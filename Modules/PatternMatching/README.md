@@ -28,13 +28,14 @@ Code of the like:
 
 Can be written using Pattern Matching as:
 
-    TreeNode node = ...
-    string description = node.Match()
-                             .Returns<string>
-                             .Case<FruitNode>(fruit => $"A {fruit.Name} fruit")
-                             .Case<AnimalNode>(animal => animal.Size == Size.Large, $"A large {animal.Name} animal")
-                             .Default(node => "Something else");
+    using static Oniony.Sprouts.Core.PatternMatching.PatternMatching;
+    ...
+    string description = PatternMatch(node).Returns<string>
+                                           .Case<FruitNode>(fruit => $"A {fruit.Name} fruit")
+                                           .Case<AnimalNode>(animal => animal.Size == Size.Large, $"A large {animal.Name} animal")
+                                           .Default(node => "Something else");
 
+(If you do not wish to use the static import, then simply qualify the function call as `PatternMatching.PatternMatch`.)
 - - - 
 
 © 2016 Paul Ruane

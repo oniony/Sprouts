@@ -1,18 +1,18 @@
 using System;
 
-namespace Oniony.Sprouts.Core.PatternMatching
+namespace Oniony.Sprouts.PatternMatching
 {
     /// <summary>
     /// Adds pattern matching capabilities to .NET.
     /// </summary>
-    public static class PatternMatch
+    public static class PatternMatching
     {
         /// <summary>
         /// Starts a pattern match.
         /// </summary>
-        /// <param name="this">The object to pattern match.</param>
+        /// <param name="obj">The object to pattern match.</param>
         /// <returns>The pattern match context.</returns>
-        public static PatternMatch<TTarget, object> Match<TTarget>(this TTarget @this) => new PatternMatch<TTarget, object>(@this);
+        public static PatternMatch<TTarget, object> PatternMatch<TTarget>(TTarget obj) => new PatternMatch<TTarget, object>(obj);
     }
 
     /// <summary>
@@ -171,7 +171,7 @@ namespace Oniony.Sprouts.Core.PatternMatching
         /// Executes the specified action if no previous matches were successful.
         /// </summary>
         /// <param name="action">The action to run.</param>
-        public PatternMatch<TTarget, TResult> Default(Action<TTarget> action)
+        public PatternMatch<TTarget, TResult> Otherwise(Action<TTarget> action)
         {
             if (!this.matched)
             {
@@ -186,13 +186,24 @@ namespace Oniony.Sprouts.Core.PatternMatching
         /// Executes the specified action if no previous matches were successful.
         /// </summary>
         /// <param name="function">The function to apply.</param>
-        public PatternMatch<TTarget, TResult> Default(Func<TTarget, TResult> function)
+        public PatternMatch<TTarget, TResult> Otherwise(Func<TTarget, TResult> function)
         {
             if (!this.matched)
             {
                 this.result = function(this.target);
                 this.matched = true;
             }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Throws an exception if matches have been made.
+        /// </summary>
+        /// <returns></returns>
+        public PatternMatch<TTarget, TResult> OtherwiseThrow()
+        {
+            if (!this.matched) throw new MatchFailureException("The pattern did not match any cases.");
 
             return this;
         }
