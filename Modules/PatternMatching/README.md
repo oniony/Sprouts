@@ -38,4 +38,4 @@ Can be written using Pattern Matching as:
 (If you do not wish to use the static import, then simply qualify the function call as `PatternMatching.PatternMatch`.)
 - - - 
 
-© 2016 Paul Ruane
+© 2016–2017 Paul Ruane
